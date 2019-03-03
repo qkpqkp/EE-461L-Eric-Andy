@@ -11,6 +11,7 @@
 <%@ page import="com.google.appengine.api.datastore.Key" %>
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
 <%@ page import="com.googlecode.objectify.*" %>
+<%@ page import="java.util.Objects" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="guestbook.Greeting" %>
 <%@ page import="guestbook.SubscribedUser" %>
@@ -39,12 +40,42 @@
     User user = userService.getCurrentUser();
     if (user != null) {
       	pageContext.setAttribute("p_user", user);
-   	
+   	if (pageContext.getAttribute("p_user")!=null){
 %>
 	<form action="/subscribe" method="post">
  		<div><input type="submit" value="Subscribe" /></div>
  		<input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
  	</form>
+ 	<form action="/unsubscribe" method="post">
+ 		<div><input type="submit" value="unSubscribe" /></div>
+ 		<input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
+ 	</form>
+<%
+		String subscription_status = request.getParameter("subscription");
+		if(Objects.equals(subscription_status,"exists")){
+			%>
+			<p>You are already subscribed!</p>
+			<%
+		}
+		if(Objects.equals(subscription_status,"success")){
+			%>
+			<p>You subscribed successfully!</p>
+			<%
+		}
+		
+		String unsubscription_status = request.getParameter("unsubscription");
+		if(Objects.equals(unsubscription_status,"fail")){
+			%>
+			<p>You were not subscribed!</p>
+			<%
+		}
+		if(Objects.equals(unsubscription_status,"success")){
+			%>
+			<p>You unsubscribed successfully!</p>
+			<%
+		}
+   	}
+%>
 <p>Hello, <b>${fn:escapeXml(p_user.nickname)}</b>! You can 
 <a href="post.jsp">post </a> or 
 <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.</p>

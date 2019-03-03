@@ -1,4 +1,5 @@
 package guestbook;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.googlecode.objectify.ObjectifyService;
-public class SubscribeServlet extends HttpServlet {
+public class unSubscribeServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
 		UserService userService = UserServiceFactory.getUserService();
@@ -30,13 +31,12 @@ public class SubscribeServlet extends HttpServlet {
         	System.out.println(u+" "+user.getNickname());
         	
         	if(u.toString().equals(user.getNickname())) {	
-        		resp.sendRedirect("/ofyguestbook.jsp?subscription=exists");
+        		ofy().delete().entity(u).now();
+        		resp.sendRedirect("/ofyguestbook.jsp?unsubscription=success");
         		return;
         	}
         }
-        SubscribedUser su = new SubscribedUser(user.getNickname());
-        ofy().save().entity(su).now();
-        
-        resp.sendRedirect("/ofyguestbook.jsp?subscription=success");
+
+        resp.sendRedirect("/ofyguestbook.jsp?unsubscription=fail");
 	}
 }

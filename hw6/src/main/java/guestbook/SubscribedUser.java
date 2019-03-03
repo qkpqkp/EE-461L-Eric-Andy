@@ -8,25 +8,16 @@ import com.googlecode.objectify.annotation.Parent;
 
 @Entity
 public class SubscribedUser{
-	@Parent Key<String> user;
+	@Parent Key<Guestbook> guestbookName;
 	@Id Long id;
+	@Index String user;
 	private SubscribedUser() {}
 	public SubscribedUser(String user) {
-		this.user=Key.create(String.class,user);
+		this.user=user;
 	}
-	@Override
-    public boolean equals(Object o) {
-        if(o.getClass()!=SubscribedUser.class) {
-        	return false;
-        }
-        if(o.toString()!=this.toString()) {
-        	return false;
-        }else {
-        	return true;
-        }
-    }
+	
 	@Override
 	public String toString() {
-		return this.user.getString();
+		return this.user;
 	}
 }
