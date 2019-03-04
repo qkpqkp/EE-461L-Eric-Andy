@@ -27,7 +27,6 @@ public class SubscribeServlet extends HttpServlet {
         
         
         for (SubscribedUser u:users) {
-        	System.out.println(u+" "+user.getNickname());
         	
         	if(u.toString().equals(user.getNickname())) {	
         		resp.sendRedirect("/ofyguestbook.jsp?subscription=exists");

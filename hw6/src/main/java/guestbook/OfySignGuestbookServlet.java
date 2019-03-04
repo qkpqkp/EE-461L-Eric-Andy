@@ -38,7 +38,7 @@ public class OfySignGuestbookServlet extends HttpServlet {
         ofy().save().entity(greeting).now();
         
 
-        resp.sendRedirect("/ofyguestbook.jsp?guestbookName=" + guestbookName);
+        resp.sendRedirect("/");
         
     }
 }

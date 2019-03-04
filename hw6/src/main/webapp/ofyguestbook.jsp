@@ -101,7 +101,7 @@ in order to
 	
     if (greetings.isEmpty()) {
         %>
-        <p>Guestbook '${fn:escapeXml(guestbookName)}' has no messages.</p>
+        <p>Blog '${fn:escapeXml(guestbookName)}' has no messages.</p>
         <%
     } else {
         %>
@@ -125,7 +125,7 @@ in order to
          
         <%
         int content_id=0;
-        for (int j=0;j<5;j++) {
+        for (int j=0;j<5&&j<greetings.size();j++) {
         	
         	Greeting greeting=greetings.get(j);
         	pageContext.setAttribute("title",

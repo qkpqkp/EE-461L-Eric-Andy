@@ -28,7 +28,6 @@ public class unSubscribeServlet extends HttpServlet {
         
         
         for (SubscribedUser u:users) {
-        	System.out.println(u+" "+user.getNickname());
         	
         	if(u.toString().equals(user.getNickname())) {	
         		ofy().delete().entity(u).now();

@@ -25,8 +25,7 @@ public class CronJob extends HttpServlet {
 	private static final Logger _logger = Logger.getLogger(CronJob.class.getName());
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 	throws IOException {
-		UserService userService = UserServiceFactory.getUserService();
-        User user = userService.getCurrentUser();
+		
         
         List<SubscribedUser> users = ObjectifyService.ofy().load().type(SubscribedUser.class).list();
         
@@ -75,6 +74,7 @@ public class CronJob extends HttpServlet {
             		   Mail_Text+=greeting.getContent()+"\n\n";
             	   }
                }
+               System.out.println(Mail_Text);
                message.setText(Mail_Text);
 
                // Send message
