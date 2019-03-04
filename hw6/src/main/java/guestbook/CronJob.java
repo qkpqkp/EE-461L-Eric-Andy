@@ -74,11 +74,14 @@ public class CronJob extends HttpServlet {
             		   Mail_Text+=greeting.getContent()+"\n\n";
             	   }
                }
-               System.out.println(Mail_Text);
+               
+               
                message.setText(Mail_Text);
 
                // Send message
-               Transport.send(message);
+               if(Mail_Text.length()>0){
+            	   Transport.send(message);
+               }  
                System.out.println("Sent message successfully....");
             } catch (MessagingException mex) {
                mex.printStackTrace();

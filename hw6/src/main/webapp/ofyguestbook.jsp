@@ -147,7 +147,7 @@ in order to
             }
             
             %>
-            <blockquote>${fn:escapeXml(content)}</blockquote>
+            <blockquote class="content">${fn:escapeXml(content)}</blockquote>
             <%
         }
         %>
@@ -169,12 +169,12 @@ in order to
                 pageContext.setAttribute("user",
                                         greeting.getUser());
                 %>
-                <p><b>${fn:escapeXml(title)}</b> Post by <b>${fn:escapeXml(user.nickname)}</b> on <b>${fn:escapeXml(date)}</b></p>
+                <p><b class="title">${fn:escapeXml(title)}</b> Post by <b>${fn:escapeXml(user.nickname)}</b> on <b>${fn:escapeXml(date)}</b></p>
                 <%
             }
         	
             %>
-            <blockquote>${fn:escapeXml(content)}</blockquote>
+            <blockquote class="content">${fn:escapeXml(content)}</blockquote>
             
 			<%
 			

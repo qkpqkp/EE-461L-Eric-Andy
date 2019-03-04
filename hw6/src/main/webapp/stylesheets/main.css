@@ -1,5 +1,11 @@
 body {
-   font-family: Verdana, Helvetica, sans-serif;
-   background-color: #FFFFCC;
+   background-color: #FFF176;
 }
 
+.title{
+	font-family: verdana;
+}
+
+.content{
+	font-family: courier;
+}

@@ -20,6 +20,7 @@
 <html>
 <head>
 <title>post</title>
+<link type="text/css" rel="stylesheet" href="/stylesheets/post.css" />
 </head>
 <body>
 	<%
