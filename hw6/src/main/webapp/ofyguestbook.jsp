@@ -118,9 +118,28 @@ in order to
             			
             			document.getElementById('hide').style.display="block";
                 	}
+					function hide_content(id){
+						
+            			var i=id.substr(1);
+            			i="c".concat(i);
+            			
+    					var content = document.getElementById(i);
+    					
+    					content.style.display="none";
+    					
+    				}
+					function show_content(id){
+            			var i=id.substr(1);
+            			i="c".concat(i);
+            			
+    					var content = document.getElementById(i);
+    					
+    					content.style.display="block";
+    				}
             		window.onload = function(){
             		    document.getElementById('b1').click();
             		}
+					
          </script>
          
         <%
@@ -137,18 +156,22 @@ in order to
             if (greeting.getUser() == null) {
             	 %>           	 
                  <p><b>${fn:escapeXml(title)}</b> Post by an anonymous person on <b>${fn:escapeXml(date)}</b></p>
+                 
                  <%
             } else {
                 pageContext.setAttribute("user",
                                          greeting.getUser());
                 %>
                 <p class="title"><b>${fn:escapeXml(title)}</b> Post by <b>${fn:escapeXml(user.nickname)}</b> on <b>${fn:escapeXml(date)}</b></p>                
+                <button onClick="show_content(this.id)" id=<%="s".concat(Integer.toString(content_id))%>>show content</button>
+                <button onClick="hide_content(this.id)" id=<%="h".concat(Integer.toString(content_id))%>>hide content</button>
                 <%
             }
             
             %>
-            <blockquote class="content">${fn:escapeXml(content)}</blockquote>
+            <blockquote class="content" id=<%="c".concat(Integer.toString(content_id))%>>${fn:escapeXml(content)}</blockquote>
             <%
+            content_id++;
         }
         %>
         <div id="hide">
@@ -170,14 +193,16 @@ in order to
                                         greeting.getUser());
                 %>
                 <p><b class="title">${fn:escapeXml(title)}</b> Post by <b>${fn:escapeXml(user.nickname)}</b> on <b>${fn:escapeXml(date)}</b></p>
+                <button onClick="show_content(this.id)" id=<%="s".concat(Integer.toString(content_id))%>>show content</button>
+                <button onClick="hide_content(this.id)" id=<%="h".concat(Integer.toString(content_id))%>>hide content</button>
                 <%
             }
         	
             %>
-            <blockquote class="content">${fn:escapeXml(content)}</blockquote>
+            <blockquote class="content" id=<%="c".concat(Integer.toString(content_id))%>>${fn:escapeXml(content)}</blockquote>
             
 			<%
-			
+			content_id++;
         }
         %>
         </div>
